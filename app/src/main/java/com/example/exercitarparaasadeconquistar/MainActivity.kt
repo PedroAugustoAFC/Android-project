@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var edName: EditText
@@ -28,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         tvErro = findViewById(R.id.tvErro)
     }
 
-
     fun PrxPG(view: View){
         val Peso = intent.getStringExtra("Weight")
         val Altura = intent.getStringExtra("Height")
@@ -36,20 +38,25 @@ class MainActivity : AppCompatActivity() {
         val Nome = intent.getStringExtra("UserName")
         val Senha = intent.getStringExtra("UserPassword")
         val Ficha = Intent(this,FichaDeTreino::class.java)
-        if (edName.text.toString()==Nome &&  edSenha.text.toString()==Senha){
-            val texto = edName.text.toString()
-            Ficha.putExtra("Nome",texto)
-            Ficha.putExtra("IMC",IMC)
-            Ficha.putExtra("Weight",Peso)
-            Ficha.putExtra("Height",Altura)
-            startActivity(Ficha)
-        }else if(edName.text.toString()==Nome){
-            edSenha.setText("")
-            tvErro.visibility = View.VISIBLE
+        if (edName.text.toString()=="Professor" &&  edSenha.text.toString()=="123"){
+            val Dev = Intent(this,ListadeUsuarios::class.java)
+            startActivity(Dev)
         }else{
-            edName.setText("")
-            edSenha.setText("")
-            tvErro.visibility = View.VISIBLE
+            if (edName.text.toString()==Nome &&  edSenha.text.toString()==Senha){
+                val texto = edName.text.toString()
+                Ficha.putExtra("Nome",texto)
+                Ficha.putExtra("IMC",IMC)
+                Ficha.putExtra("Weight",Peso)
+                Ficha.putExtra("Height",Altura)
+                startActivity(Ficha)
+            }else if(edName.text.toString()==Nome){
+                edSenha.setText("")
+                tvErro.visibility = View.VISIBLE
+            }else{
+                edName.setText("")
+                edSenha.setText("")
+                tvErro.visibility = View.VISIBLE
+            }
         }
     }
 }

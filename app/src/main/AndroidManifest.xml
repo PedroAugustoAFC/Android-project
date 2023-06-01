@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ExercitarParaASaúdeConquistar"
         tools:targetApi="31">
         <activity
+            android:name=".ListadeUsuarios"
+            android:exported="false" />
+        <activity
             android:name=".PerfildoUsuario"
             android:exported="false" />
         <activity
